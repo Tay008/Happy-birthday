@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday 🎂</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #ffebf0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .text {
+            font-size: 24px;
+            color: #444;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .cake {
+            width: 200px;
+            height: 120px;
+            background: linear-gradient(to bottom, #ffb3b3, #ff6666);
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .icing {
+            width: 100%;
+            height: 40px;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            position: absolute;
+            top: -20px;
+            clip-path: polygon(0% 100%, 10% 80%, 20% 100%, 30% 80%, 40% 100%, 50% 80%, 60% 100%, 70% 80%, 80% 100%, 90% 80%, 100% 100%);
+        }
+
+        .candle {
+            width: 12px;
+            height: 50px;
+            background: linear-gradient(to bottom, red, darkred);
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        .flame {
+            width: 18px;
+            height: 25px;
+            background: radial-gradient(circle, orange, yellow);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            animation: flicker 1s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0.8; transform: translateY(-5px); }
+        }
+
+        .happy-birthday {
+            font-size: 50px;
+            color: #ff4081;
+            font-weight: bold;
+            display: none;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: gold;
+            border-radius: 50%;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .balloon {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            bottom: -100px;
+            animation: rise 4s linear infinite;
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text">Tap on Cake</h1>
+    
+    <div class="cake" onclick="startCelebration()">
+        <div class="icing"></div>
+        <div class="candle">
+            <div class="flame"></div>
+        </div>
+    </div>
+
+    <h1 class="happy-birthday">Happy Birthday! 🎉</h1>
+
+    <script>
+        function startCelebration() {
+            // "Tap on Cake" text hide karna
+            document.querySelector('.text').style.display = 'none';
+
+            // Cake hide karna
+            document.querySelector('.cake').style.opacity = '0';
+            setTimeout(() => {
+                document.querySelector('.cake').style.display = 'none';
+                
+                // Happy Birthday text dikhana
+                document.querySelector('.happy-birthday').style.display = 'block';
+
+                // Confetti add karna
+                for (let i = 0; i < 30; i++) {
+                    let confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.top = Math.random() * -50 + 'px';
+                    document.body.appendChild(confetti);
+                }
+
+                // Balloons add karna
+                for (let i = 0; i < 10; i++) {
+                    let balloon = document.createElement('div');
+                    balloon.className = 'balloon';
+                    balloon.style.left = Math.random() * window.innerWidth + 'px';
+                    balloon.style.backgroundColor = ['red', 'blue', 'yellow', 'green', 'purple'][Math.floor(Math.random() * 5)];
+                    document.body.appendChild(balloon);
+                }
+            }, 1000); // Cake fade hone ke 1 second baad
+        }
+    </script>
+</body>
+</html>
